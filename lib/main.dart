@@ -28,81 +28,82 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late int _counter1;
-  late int _counter2;
-  late int _counter3;
-  late int _counter4;
-
-  @override
-  void initState() {
-    super.initState();
-    _counter1 = 0;
-    _counter2 = 0;
-    _counter3 = 0;
-    _counter4 = 0;
-  }
+  
+  LevelTwo _trainning = LevelTwo(arrowsPerEnd: 6, technical: 'Transferencia');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      /*appBar: AppBar(
+        title: Text(_trainning.technical),
         centerTitle: true,
-      ),
+      ),*/
       body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Text('${_counter1 + _counter2 + _counter3 + _counter4}'),
-            Expanded(
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: FeelButton(
-                      color: Colors.amber,
-                      title: 'Uno',
-                      counter: _counter1,
-                      onChanged: incrementCounter
-                    ),
+        child: Stack(
+          alignment: Alignment.center,
+          children:<Widget>[
+            Column(
+              children: <Widget>[
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: FeelButton(
+                          color: Colors.amber,
+                          title: 'Uno',
+                          counter: _trainning._counter1,
+                          onChanged: incrementCounter
+                        ),
+                      ),
+                      Expanded(
+                        child: FeelButton(
+                          color: Colors.grey,
+                          title: 'Dos',
+                          counter: _trainning._counter2,
+                          onChanged: incrementCounter
+                        ),
+                      )
+                    ],
                   ),
-                  Expanded(
-                    child: FeelButton(
-                      color: Colors.grey,
-                      title: 'Dos',
-                      counter: _counter2,
-                      onChanged: incrementCounter
-                    ),
+                ),
+                Expanded(
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: FeelButton(
+                          color: Colors.blueGrey,
+                          title: 'Tres',
+                          counter: _trainning._counter3,
+                          onChanged: incrementCounter
+                        ),
+                      ),
+                      Expanded( 
+                        child: FeelButton(
+                          color: Colors.brown,
+                          title: 'Cuatro',
+                          counter: _trainning._counter4,
+                          onChanged: incrementCounter
+                        ),
+                      ),
+                    ],
                   )
-                ],
-              ),
+                )
+              ],
             ),
-            Expanded(
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: FeelButton(
-                      color: Colors.blueGrey,
-                      title: 'Tres',
-                      counter: _counter3,
-                      onChanged: incrementCounter
-                    ),
-                  ),
-                  Expanded( 
-                    child: FeelButton(
-                      color: Colors.brown,
-                      title: 'Cuatro',
-                      counter: _counter4,
-                      onChanged: incrementCounter
-                    ),
-                  ),
-                ],
-              )
-            )
-          ],
+            Text('Tiros: ${_trainning._counter1 + _trainning._counter2 + _trainning._counter3 + _trainning._counter4} \nSeries: ${_trainning._series}',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ]
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print('$_counter1');
+          print('$_trainning._counter1');
         },
       ),
     );
@@ -110,11 +111,17 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void incrementCounter(String title) {
     setState(() {
-      _counter1 = (title == 'Uno') ? (_counter1 + 1) : _counter1;
-      _counter2 = (title == 'Dos') ? (_counter2 + 1) : _counter2;
-      _counter3 = (title == 'Tres') ? (_counter3 + 1) : _counter3;
-      _counter4 = (title == 'Cuatro') ? (_counter4 + 1) : _counter4;
+      _trainning._counter1 = (title == 'Uno') ? (_trainning._counter1 + 1) : _trainning._counter1;
+      _trainning._counter2 = (title == 'Dos') ? (_trainning._counter2 + 1) : _trainning._counter2;
+      _trainning._counter3 = (title == 'Tres') ? (_trainning._counter3 + 1) : _trainning._counter3;
+      _trainning._counter4 = (title == 'Cuatro') ? (_trainning._counter4 + 1) : _trainning._counter4;
     });
+
+    if ((_trainning._counter1 + _trainning._counter2 + _trainning._counter3 + _trainning._counter4) > (_trainning._series * _trainning.arrowsPerEnd)){
+      setState(() {
+        _trainning._series++;
+      });
+    }
   }
 }
 
@@ -170,4 +177,18 @@ class FeelButton extends StatelessWidget {
   _onChanged() {
     onChanged(title);
   }
+}
+
+class LevelTwo{
+  int arrowsPerEnd;
+  int _counter1 = 0;
+  int _counter2 = 0;
+  int _counter3 = 0;
+  int _counter4 = 0;
+  int _series = 0;
+  String technical;
+
+  LevelTwo({required this.arrowsPerEnd, required this.technical});
+
+
 }
