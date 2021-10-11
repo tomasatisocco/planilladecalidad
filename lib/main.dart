@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: FeelButton(
                           color: Colors.amber,
                           title: 'Uno',
-                          counter: _trainning._counter1,
+                          counter: _trainning.shotSecuence.where((element) => element == 'BB').length,
                           onChanged: incrementCounter
                         ),
                       ),
@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: FeelButton(
                           color: Colors.grey,
                           title: 'Dos',
-                          counter: _trainning._counter2,
+                          counter: _trainning.shotSecuence.where((element) => element == 'BM').length,
                           onChanged: incrementCounter
                         ),
                       )
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: FeelButton(
                           color: Colors.blueGrey,
                           title: 'Tres',
-                          counter: _trainning._counter3,
+                          counter: _trainning.shotSecuence.where((element) => element == 'MB').length,
                           onChanged: incrementCounter
                         ),
                       ),
@@ -81,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: FeelButton(
                           color: Colors.brown,
                           title: 'Cuatro',
-                          counter: _trainning._counter4,
+                          counter: _trainning.shotSecuence.where((element) => element == 'MM').length,
                           onChanged: incrementCounter
                         ),
                       ),
@@ -90,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
               ],
             ),
-            Text('Tiros: ${_trainning._counter1 + _trainning._counter2 + _trainning._counter3 + _trainning._counter4} \nSeries: ${_trainning._series}',
+            Text('Tiros: ${_trainning.shotSecuence.length} \nSeries: ${_trainning._series}',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -103,21 +103,38 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print('$_trainning._counter1');
+          _trainning.shotSecuence.forEach((element) {print(element);});
         },
       ),
     );
   }
 
   void incrementCounter(String title) {
-    setState(() {
-      _trainning._counter1 = (title == 'Uno') ? (_trainning._counter1 + 1) : _trainning._counter1;
-      _trainning._counter2 = (title == 'Dos') ? (_trainning._counter2 + 1) : _trainning._counter2;
-      _trainning._counter3 = (title == 'Tres') ? (_trainning._counter3 + 1) : _trainning._counter3;
-      _trainning._counter4 = (title == 'Cuatro') ? (_trainning._counter4 + 1) : _trainning._counter4;
-    });
+    switch (title) {
+      case 'Uno':
+        setState(() {
+          _trainning.shotSecuence.add('BB');
+        });
+        break;
+      case 'Dos':
+        setState(() {
+          _trainning.shotSecuence.add('BM');
+        });
+        break;
+      case 'Tres':
+        setState(() {
+          _trainning.shotSecuence.add('MB');
+        });  
+        break;
+      case 'Cuatro':
+        setState(() {
+          _trainning.shotSecuence.add('MM');
+        });
+        break;
+      default:
+    }
 
-    if ((_trainning._counter1 + _trainning._counter2 + _trainning._counter3 + _trainning._counter4) > (_trainning._series * _trainning.arrowsPerEnd)){
+    if ((_trainning.shotSecuence.length) > (_trainning._series * _trainning.arrowsPerEnd)){
       setState(() {
         _trainning._series++;
       });
@@ -181,14 +198,9 @@ class FeelButton extends StatelessWidget {
 
 class LevelTwo{
   int arrowsPerEnd;
-  int _counter1 = 0;
-  int _counter2 = 0;
-  int _counter3 = 0;
-  int _counter4 = 0;
   int _series = 0;
   String technical;
+  List <String> shotSecuence = [];
 
   LevelTwo({required this.arrowsPerEnd, required this.technical});
-
-
 }
