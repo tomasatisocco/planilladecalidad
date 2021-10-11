@@ -172,23 +172,21 @@ class FeelButton extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          //Expanded(
-             MaterialButton(
-              elevation: 0.0,
-              minWidth: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Text('$counter',
-                style: TextStyle(
-                  fontSize: 40.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                )
-              ),
-              onPressed: () {
-                _onChanged();
-              },
+          MaterialButton(
+            elevation: 0.0,
+            minWidth: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Text('$counter',
+              style: TextStyle(
+                fontSize: 40.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              )
             ),
-          //),
+            onPressed: () {
+              _onChanged();
+            },
+          ),
         ],
       ),
     );    
