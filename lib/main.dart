@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),*/
       body: SafeArea(
         child: Stack(
-          alignment: Alignment.center,
+          alignment: Alignment(-0.9, 0.95),
           children:<Widget>[
             Column(
               children: <Widget>[
@@ -50,15 +50,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       Expanded(
                         child: FeelButton(
                           color: Colors.amber,
-                          title: 'Uno',
+                          title: 'Buena Sensacion\nBuen Tiro',
                           counter: _trainning.shotSecuence.where((element) => element == 'BB').length,
                           onChanged: incrementCounter
                         ),
                       ),
                       Expanded(
                         child: FeelButton(
-                          color: Colors.grey,
-                          title: 'Dos',
+                          color: Colors.redAccent,
+                          title: 'Buena Sensacion\nMal Tiro',
                           counter: _trainning.shotSecuence.where((element) => element == 'BM').length,
                           onChanged: incrementCounter
                         ),
@@ -71,23 +71,23 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: <Widget>[
                       Expanded(
                         child: FeelButton(
-                          color: Colors.blueGrey,
-                          title: 'Tres',
+                          color: Colors.blue,
+                          title: 'Mala Sensacion\nBuen Tiro',
                           counter: _trainning.shotSecuence.where((element) => element == 'MB').length,
                           onChanged: incrementCounter
                         ),
                       ),
                       Expanded( 
                         child: FeelButton(
-                          color: Colors.brown,
-                          title: 'Cuatro',
+                          color: Colors.black,
+                          title: 'Mala Sensacion\nMal Tiro',
                           counter: _trainning.shotSecuence.where((element) => element == 'MM').length,
                           onChanged: incrementCounter
                         ),
                       ),
                     ],
-                  )
-                )
+                  ),
+                ),
               ],
             ),
             Text('Tiros: ${_trainning.shotSecuence.length} \nSeries: ${_trainning._series}',
@@ -96,9 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 fontWeight: FontWeight.bold,
                 fontSize: 20.0,
               ),
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.start
             ),
-          ]
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -111,22 +111,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void incrementCounter(String title) {
     switch (title) {
-      case 'Uno':
+      case 'Buena Sensacion\nBuen Tiro':
         setState(() {
           _trainning.shotSecuence.add('BB');
         });
         break;
-      case 'Dos':
+      case 'Buena Sensacion\nMal Tiro':
         setState(() {
           _trainning.shotSecuence.add('BM');
         });
         break;
-      case 'Tres':
+      case 'Mala Sensacion\nBuen Tiro':
         setState(() {
           _trainning.shotSecuence.add('MB');
         });  
         break;
-      case 'Cuatro':
+      case 'Mala Sensacion\nMal Tiro':
         setState(() {
           _trainning.shotSecuence.add('MM');
         });
@@ -160,35 +160,38 @@ class FeelButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: color,
-      child: Column(
+      child: Stack(
+        alignment: Alignment.topCenter,
         children: <Widget>[
           Text(
             title,
+            textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 25,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          Expanded(
-            child: MaterialButton(
+          //Expanded(
+             MaterialButton(
               elevation: 0.0,
               minWidth: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: Text('$counter',
-                  style: TextStyle(
-                    fontSize: 40.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  )),
+                style: TextStyle(
+                  fontSize: 40.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                )
+              ),
               onPressed: () {
                 _onChanged();
               },
             ),
-          ),
+          //),
         ],
       ),
-    );
+    );    
   }
 
   _onChanged() {
