@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:planilla_de_calidad/classes/trainning.dart';
 import 'package:planilla_de_calidad/widgets/feelButton.dart';
+import 'package:planilla_de_calidad/widgets/circularButton.dart';
 
 class LevelTwoPage extends StatefulWidget {
   LevelTwoPage({Key? key, required this.title}) : super(key: key);
@@ -82,13 +83,54 @@ class _LevelTwoPageState extends State<LevelTwoPage> {
               ),
               textAlign: TextAlign.start
             ),
+            Positioned(
+              right: 30,
+              bottom: 30,
+              child: Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  Transform.translate(
+                    offset: Offset(-300.0, 0.0),
+                    child: CircularButton(
+                      color: Colors.lightBlueAccent,
+                      width: 50,
+                      height: 50,
+                      icon: Icon(Icons.menu, color: Colors.white), 
+                      onPress: (){},
+                    ),
+                  ),
+                  Transform.translate(
+                    offset: Offset(-200.0, 0.0),
+                    child: CircularButton(
+                      color: Colors.blueGrey,
+                      width: 50,
+                      height: 50,
+                      icon: Icon(Icons.menu, color: Colors.white), 
+                      onPress: (){},
+                    ),
+                  ),
+                  Transform.translate(
+                    offset: Offset(-100.0, 0.0),
+                    child: CircularButton(
+                      color: Colors.orangeAccent,
+                      width: 50,
+                      height: 50,
+                      icon: Icon(Icons.menu, color: Colors.white), 
+                      onPress: (){},
+                    ),
+                  ),
+                  CircularButton(
+                    color: Colors.red,
+                    width: 60,
+                    height: 60,
+                    icon: Icon(Icons.menu, color: Colors.white), 
+                    onPress: (){},
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _trainning.shotSecuence.forEach((element) {print(element);});
-        },
       ),
     );
   }

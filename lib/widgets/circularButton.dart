@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CricularButton extends StatelessWidget{
+class CircularButton extends StatelessWidget{
 
   final double width;
   final double height;
@@ -8,7 +8,7 @@ class CricularButton extends StatelessWidget{
   final Icon icon;
   final Function onPress;
 
-  CricularButton({required this.color, required this.width, required this.height, required this.icon, required this. onPress});
+  CircularButton({required this.color, required this.width, required this.height, required this.icon, required this. onPress});
 
   @override
   Widget build(BuildContext context){
@@ -16,7 +16,7 @@ class CricularButton extends StatelessWidget{
       decoration: BoxDecoration(color: color, shape: BoxShape.circle),
       width: width,
       height: height,
-      child: IconButton(icon: icon, enableFeedback: true, onPressed: function,),
+      child: IconButton(icon: icon, enableFeedback: true, onPressed: function),
     );
   }
 
