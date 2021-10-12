@@ -12,9 +12,26 @@ class LevelTwoPage extends StatefulWidget {
   _LevelTwoPageState createState() => _LevelTwoPageState();
 }
 
-class _LevelTwoPageState extends State<LevelTwoPage> {
+class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderStateMixin{
+
+  late AnimationController animationController;
+  late Animation degOneTransformAnimation;
+  late Animation rotationAnimation;
   
   Trainning _trainning = Trainning(arrowsPerEnd: 6, technical: 'Transferencia');
+
+  @override
+  void initState() {
+    animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+    degOneTransformAnimation = Tween(begin: 0.0, end: 1.0).animate(animationController);
+    rotationAnimation = Tween(begin: 180.0, end: 0.0).animate(CurvedAnimation(parent: animationController, curve: Curves.easeOut));
+    super.initState();
+    animationController.addListener(() {
+      setState(() {
+        
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,41 +107,63 @@ class _LevelTwoPageState extends State<LevelTwoPage> {
                 alignment: Alignment.center,
                 children: <Widget>[
                   Transform.translate(
-                    offset: Offset(-300.0, 0.0),
-                    child: CircularButton(
-                      color: Colors.lightBlueAccent,
-                      width: 50,
-                      height: 50,
-                      icon: Icon(Icons.menu, color: Colors.white), 
-                      onPress: (){},
+                    offset: Offset(-300.0 * degOneTransformAnimation.value, 0.0),
+                    child: Transform(
+                      transform: Matrix4.rotationZ(rotationAnimation.value / 57.29)..scale(degOneTransformAnimation.value),
+                      alignment: Alignment.center,
+                      child: CircularButton(
+                        color: Colors.lightBlueAccent,
+                        width: 50,
+                        height: 50,
+                        icon: Icon(Icons.menu, color: Colors.white), 
+                        onPress: (){},
+                      ),
                     ),
                   ),
                   Transform.translate(
-                    offset: Offset(-200.0, 0.0),
-                    child: CircularButton(
-                      color: Colors.blueGrey,
-                      width: 50,
-                      height: 50,
-                      icon: Icon(Icons.menu, color: Colors.white), 
-                      onPress: (){},
+                    offset: Offset(-200.0 * degOneTransformAnimation.value, 0.0),
+                    child: Transform(
+                      transform: Matrix4.rotationZ(rotationAnimation.value / 57.29)..scale(degOneTransformAnimation.value),
+                      alignment: Alignment.center,
+                      child: CircularButton(
+                        color: Colors.blueGrey,
+                        width: 50,
+                        height: 50,
+                        icon: Icon(Icons.menu, color: Colors.white), 
+                        onPress: (){},
+                      ),
                     ),
                   ),
                   Transform.translate(
-                    offset: Offset(-100.0, 0.0),
-                    child: CircularButton(
-                      color: Colors.orangeAccent,
-                      width: 50,
-                      height: 50,
-                      icon: Icon(Icons.menu, color: Colors.white), 
-                      onPress: (){},
+                    offset: Offset(-100.0 * degOneTransformAnimation.value, 0.0),
+                    child: Transform(
+                      transform: Matrix4.rotationZ(rotationAnimation.value / 57.29)..scale(degOneTransformAnimation.value),
+                      alignment: Alignment.center,
+                      child: CircularButton(
+                        color: Colors.orangeAccent,
+                        width: 50,
+                        height: 50,
+                        icon: Icon(Icons.menu, color: Colors.white), 
+                        onPress: (){},
+                      ),
                     ),
                   ),
-                  CircularButton(
-                    color: Colors.red,
-                    width: 60,
-                    height: 60,
-                    icon: Icon(Icons.menu, color: Colors.white), 
-                    onPress: (){},
+                  Transform(
+                    transform: Matrix4.rotationZ(rotationAnimation.value / 57.29),
+                      alignment: Alignment.center,
+                    child: CircularButton(
+                      color: Colors.red,
+                      width: 60,
+                      height: 60,
+                      icon: Icon(Icons.menu, color: Colors.white), 
+                      onPress: (){
+                        if (animationController.isCompleted) {
+                          animationController.reverse();
+                        } else {
+                          animationController.forward();
+                        }
+                      },
+                    ),
                   ),
                 ],
               ),
