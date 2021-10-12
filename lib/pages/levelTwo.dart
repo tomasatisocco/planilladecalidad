@@ -36,7 +36,6 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
     return Scaffold(
       body: SafeArea(
         child: Stack(
-          alignment: Alignment(-0.9, 0.95),
           children:<Widget>[
             Column(
               children: <Widget>[
@@ -86,80 +85,91 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                 ),
               ],
             ),
-            Text('Tiros: ${_trainning.shotSecuence.length} \nSeries: ${_trainning.series}',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 20.0,
+            Positioned(
+              bottom:30.0,
+              left: 30.0,
+              child: Text('Tiros: ${_trainning.shotSecuence.length} \nSeries: ${_trainning.series}',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                ),
+                textAlign: TextAlign.start
               ),
-              textAlign: TextAlign.start
             ),
             Positioned(
               right: 30,
               bottom: 30,
-              child: Stack(
-                alignment: Alignment.center,
-                children: <Widget>[
-                  Transform.translate(
-                    offset: Offset(-300.0 * degOneTransformAnimation.value, 0.0),
-                    child: Transform(
-                      transform: Matrix4.rotationZ(rotationAnimation.value / 57.29)..scale(degOneTransformAnimation.value),
-                      alignment: Alignment.center,
-                      child: CircularButton(
-                        color: Colors.lightBlueAccent,
-                        width: 50,
-                        height: 50,
-                        icon: Icon(Icons.menu, color: Colors.white), 
-                        onPress: (){},
+              child: SizedBox(
+                width: 300,
+                child: Stack(
+                  alignment: Alignment.centerRight,
+                  children: <Widget>[
+                    Transform.translate(
+                      offset: Offset(-240.0 * degOneTransformAnimation.value, 0.0),
+                      child: Transform(
+                        transform: Matrix4.rotationZ(rotationAnimation.value / 57.29)..scale(degOneTransformAnimation.value),
+                        alignment: Alignment.center,
+                        child: CircularButton(
+                          color: Colors.lightBlueAccent,
+                          width: 50,
+                          height: 50,
+                          icon: Icon(Icons.remove, color: Colors.white),
+                          tooltip: 'Borrar Ultimo', 
+                          onPress: (){
+                            
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                  Transform.translate(
-                    offset: Offset(-200.0 * degOneTransformAnimation.value, 0.0),
-                    child: Transform(
-                      transform: Matrix4.rotationZ(rotationAnimation.value / 57.29)..scale(degOneTransformAnimation.value),
-                      alignment: Alignment.center,
-                      child: CircularButton(
-                        color: Colors.blueGrey,
-                        width: 50,
-                        height: 50,
-                        icon: Icon(Icons.menu, color: Colors.white), 
-                        onPress: (){},
+                    Transform.translate(
+                      offset: Offset(-170.0 * degOneTransformAnimation.value, 0.0),
+                      child: Transform(
+                        transform: Matrix4.rotationZ(rotationAnimation.value / 57.29)..scale(degOneTransformAnimation.value),
+                        alignment: Alignment.center,
+                        child: CircularButton(
+                          color: Colors.blueGrey,
+                          width: 50,
+                          height: 50,
+                          icon: Icon(Icons.check, color: Colors.white), 
+                          onPress: (){},
+                        ),
                       ),
                     ),
-                  ),
-                  Transform.translate(
-                    offset: Offset(-100.0 * degOneTransformAnimation.value, 0.0),
-                    child: Transform(
-                      transform: Matrix4.rotationZ(rotationAnimation.value / 57.29)..scale(degOneTransformAnimation.value),
-                      alignment: Alignment.center,
-                      child: CircularButton(
-                        color: Colors.orangeAccent,
-                        width: 50,
-                        height: 50,
-                        icon: Icon(Icons.menu, color: Colors.white), 
-                        onPress: (){},
+                    Transform.translate(
+                      offset: Offset(-100.0 * degOneTransformAnimation.value, 0.0),
+                      child: Transform(
+                        transform: Matrix4.rotationZ(rotationAnimation.value / 57.29)..scale(degOneTransformAnimation.value),
+                        alignment: Alignment.center,
+                        child: CircularButton(
+                          color: Colors.orangeAccent,
+                          width: 50,
+                          height: 50,
+                          icon: Icon(Icons.home, color: Colors.white), 
+                          onPress: (){},
+                        ),
                       ),
                     ),
-                  ),
-                  Transform(
-                    transform: Matrix4.rotationZ(rotationAnimation.value / 57.29),
+                    Transform(
+                      transform: Matrix4.rotationZ(rotationAnimation.value / 57.29),
                       alignment: Alignment.center,
-                    child: CircularButton(
-                      color: Colors.red,
-                      width: 60,
-                      height: 60,
-                      icon: Icon(Icons.menu, color: Colors.white), 
-                      onPress: (){
-                        if (animationController.isCompleted) {
-                          animationController.reverse();
-                        } else {
-                          animationController.forward();
-                        }
-                      },
+                      child: CircularButton(
+                        color: Colors.red,
+                        width: 60,
+                        height: 60,
+                        icon: Icon(Icons.menu, color: Colors.white),
+                        tooltip: 'Menu',
+                        onPress: (){
+                          if (animationController.isCompleted) {
+                            animationController.reverse();
+                          } else {
+                            animationController.forward();
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
