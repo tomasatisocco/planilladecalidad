@@ -14,7 +14,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LevelTwoPage(title: 'Planilla de Calidad Home Page'),
+      initialRoute: '/',
+      routes:{
+        '/':(BuildContext context) => LevelTwoPage(),
+      }
     );
   }
 }

@@ -4,9 +4,7 @@ import 'package:planilla_de_calidad/widgets/feelButton.dart';
 import 'package:planilla_de_calidad/widgets/circularButton.dart';
 
 class LevelTwoPage extends StatefulWidget {
-  LevelTwoPage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  LevelTwoPage({Key? key}) : super(key: key);
 
   @override
   _LevelTwoPageState createState() => _LevelTwoPageState();
@@ -36,10 +34,6 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        title: Text(_trainning.technical),
-        centerTitle: true,
-      ),*/
       body: SafeArea(
         child: Stack(
           alignment: Alignment(-0.9, 0.95),
