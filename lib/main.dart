@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:planilla_de_calidad/pages/levelTwo.dart';
+import 'package:planilla_de_calidad/pages/stats.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,9 +15,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
+      initialRoute: '/Stats',
       routes:{
-        '/':(BuildContext context) => LevelTwoPage(),
+        '/LevelTwo':(BuildContext context) => LevelTwoPage(),
+        '/Stats':(BuildContext context) => StatsPage(),
       }
     );
   }
