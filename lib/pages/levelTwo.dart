@@ -116,8 +116,7 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                           height: 50,
                           icon: Icon(Icons.remove, color: Colors.white),
                           tooltip: 'Borrar Ultimo', 
-                          onPress: (){
-                            
+                          onPress: (){ 
                           },
                         ),
                       ),
@@ -131,7 +130,8 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                           color: Colors.blueGrey,
                           width: 50,
                           height: 50,
-                          icon: Icon(Icons.check, color: Colors.white), 
+                          icon: Icon(Icons.check, color: Colors.white),
+                          tooltip: 'Ver resultados', 
                           onPress: (){},
                         ),
                       ),
@@ -146,26 +146,50 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                           width: 50,
                           height: 50,
                           icon: Icon(Icons.home, color: Colors.white), 
+                          tooltip: 'Home',
                           onPress: (){},
                         ),
                       ),
                     ),
-                    Transform(
-                      transform: Matrix4.rotationZ(rotationAnimation.value / 57.29),
-                      alignment: Alignment.center,
-                      child: CircularButton(
-                        color: Colors.red,
-                        width: 60,
-                        height: 60,
-                        icon: Icon(Icons.menu, color: Colors.white),
-                        tooltip: 'Menu',
-                        onPress: (){
-                          if (animationController.isCompleted) {
+                    Positioned(
+                      right: 10,
+                      child: Transform(
+                        transform: Matrix4.rotationZ(rotationAnimation.value / 57.29)
+                        ..scale(degOneTransformAnimation.value),
+                        alignment: Alignment.center,
+                        child: CircularButton(
+                          color: Colors.white, 
+                          width: 40, 
+                          height: 40, 
+                          icon: Icon(Icons.close), 
+                          tooltip: 'Cancelar',
+                          onPress: (){
                             animationController.reverse();
-                          } else {
-                            animationController.forward();
                           }
-                        },
+                        ),
+                      ),
+                    ),
+                    Transform(
+                      transform: Matrix4.rotationZ(rotationAnimation.value / 57.29)
+                      ..scale(1 - degOneTransformAnimation.value),
+                      alignment: Alignment.center,
+                      child: AnimatedOpacity(
+                        opacity: (1.0 - degOneTransformAnimation.value),
+                        duration: Duration(milliseconds: 250),
+                        child: CircularButton(
+                          color: Colors.red,
+                          width: 60,
+                          height: 60,
+                          icon: Icon(Icons.menu, color: Colors.white),
+                          tooltip: 'Menu',
+                          onPress: (){
+                            if (animationController.isCompleted) {
+                              animationController.reverse();
+                            } else {
+                              animationController.forward();
+                            }
+                          },
+                        ),
                       ),
                     ),
                   ],
