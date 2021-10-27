@@ -23,7 +23,7 @@ class StatsPage extends StatelessWidget {
         centerTitle: true,
         leading: BackButton(
           onPressed: (){
-            actualTrainning.shotSecuence.removeWhere((element) => element == '');
+            actualTrainning.removeBlanks();
             Navigator.pop(context);
           }  
         ),
@@ -56,7 +56,7 @@ class StatsPage extends StatelessWidget {
                             margin: EdgeInsets.all(5),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: shotColor(actualTrainning.shotSecuence[index1 * actualTrainning.arrowsPerEnd + index]),
+                              color: actualTrainning.shotColor(actualTrainning.shotSecuence[index1 * actualTrainning.arrowsPerEnd + index]),
                             ),
                             child: Text(actualTrainning.shotSecuence[index1 * actualTrainning.arrowsPerEnd + index],
                             textAlign: TextAlign.center,
@@ -78,25 +78,5 @@ class StatsPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Color shotColor(String shot){
-    Color _color;
-    switch (shot) {
-      case 'BB':
-        _color = Colors.amber;
-        break;
-      case 'BM':
-        _color = Colors.red;
-        break;
-      case 'MB':
-        _color = Colors.blue;
-        break;
-      case 'MM':
-        _color = Colors.black;
-        break;
-      default: _color = Colors.transparent;
-    }
-    return _color;
   }
 }
