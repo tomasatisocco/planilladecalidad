@@ -118,6 +118,7 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                           icon: Icon(Icons.remove, color: Colors.white),
                           tooltip: 'Borrar Ultimo', 
                           onPress: (){ 
+                           
                           },
                         ),
                       ),
@@ -134,6 +135,7 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                           icon: Icon(Icons.check, color: Colors.white),
                           tooltip: 'Ver resultados', 
                           onPress: (){
+                            _trainning.completeShotSecuence();
                             Navigator.push(context, MaterialPageRoute(builder: (context) => StatsPage(actualTrainning:_trainning)));
                           },
                         ),

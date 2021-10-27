@@ -5,7 +5,15 @@ class StatsPage extends StatelessWidget {
 
   final Trainning actualTrainning;
 
-  const StatsPage({Key? key, required this.actualTrainning}) : super(key: key);
+  late List<String> _mediasPerEnd = List.generate(((actualTrainning.shotSecuence.length) / actualTrainning.arrowsPerEnd).round(), 
+    (index) =>
+      ((actualTrainning.shotSecuence.sublist(
+        index * actualTrainning.arrowsPerEnd,
+        (index * actualTrainning.arrowsPerEnd) + actualTrainning.arrowsPerEnd)
+        .where((element) => element == 'BB').length / actualTrainning.arrowsPerEnd)*100).toStringAsFixed(1) + '%'
+  );
+
+  StatsPage({Key? key, required this.actualTrainning,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,30 +21,60 @@ class StatsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Estadisticas'),
         centerTitle: true,
+        leading: BackButton(
+          onPressed: (){
+            actualTrainning.shotSecuence.removeWhere((element) => element == '');
+            Navigator.pop(context);
+          }  
+        ),
       ),
       body: SafeArea(
-        child: GridView.builder(
-          itemCount: actualTrainning.shotSecuence.length,
-          itemBuilder: (context, index) => 
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: shotColor(actualTrainning.shotSecuence[index]),
-              ),
-              child: Text(actualTrainning.shotSecuence[index],
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Text('Hola'),
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                //shrinkWrap: true,
+                itemCount: ((actualTrainning.shotSecuence.length / actualTrainning.arrowsPerEnd).round()),
+                itemBuilder:(context, index1) => SizedBox(
+                  height: 50,
+                  child: Row(
+                    children: [
+                      Text('${index1 + 1}'),
+                      ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                       shrinkWrap: true,
+                        itemCount: actualTrainning.arrowsPerEnd,
+                        itemBuilder: (context, index) => 
+                          Container(
+                            height: 40,
+                            width: 40,
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: shotColor(actualTrainning.shotSecuence[index1 * actualTrainning.arrowsPerEnd + index]),
+                            ),
+                            child: Text(actualTrainning.shotSecuence[index1 * actualTrainning.arrowsPerEnd + index],
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                     Text(_mediasPerEnd[index1]),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: actualTrainning.arrowsPerEnd,
-          ),
+          ],
         ),
       ),
     );
@@ -57,7 +95,7 @@ class StatsPage extends StatelessWidget {
       case 'MM':
         _color = Colors.black;
         break;
-      default: _color = Colors.green;
+      default: _color = Colors.transparent;
     }
     return _color;
   }
