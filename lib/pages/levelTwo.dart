@@ -118,7 +118,7 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                           icon: Icon(Icons.remove, color: Colors.white),
                           tooltip: 'Borrar Ultimo', 
                           onPress: (){ 
-                           
+                           decrementCounter();
                           },
                         ),
                       ),
@@ -237,5 +237,12 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
         _trainning.series++;
       });
     }
+  }
+
+  void decrementCounter(){
+    setState(() {
+      _trainning.shotSecuence.removeLast();
+      _trainning.series = (_trainning.shotSecuence.length / _trainning.arrowsPerEnd).round();
+    });
   }
 }
