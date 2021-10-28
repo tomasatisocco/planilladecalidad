@@ -10,7 +10,7 @@ class StatsPage extends StatelessWidget {
       ((actualTrainning.shotSecuence.sublist(
         index * actualTrainning.arrowsPerEnd,
         (index * actualTrainning.arrowsPerEnd) + actualTrainning.arrowsPerEnd)
-        .where((element) => element == 'BB').length / actualTrainning.arrowsPerEnd)*100).toStringAsFixed(1) + '%'
+        .where((element) => element == 'BB' || element == 'B').length / actualTrainning.arrowsPerEnd)*100).toStringAsFixed(1) + '%'
   );
 
   StatsPage({Key? key, required this.actualTrainning,}) : super(key: key);
