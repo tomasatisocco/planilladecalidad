@@ -5,7 +5,9 @@ import 'package:planilla_de_calidad/widgets/feelButton.dart';
 import 'package:planilla_de_calidad/widgets/circularButton.dart';
 
 class LevelTwoPage extends StatefulWidget {
-  LevelTwoPage({Key? key}) : super(key: key);
+  final Trainning trainning;
+
+  LevelTwoPage({Key? key, required this.trainning}) : super(key: key);
 
   @override
   _LevelTwoPageState createState() => _LevelTwoPageState();
@@ -16,8 +18,6 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
   late AnimationController animationController;
   late Animation degOneTransformAnimation;
   late Animation rotationAnimation;
-  
-  Trainning _trainning = Trainning(arrowsPerEnd: 6, technical: 'Transferencia');
 
   @override
   void initState() {
@@ -47,7 +47,7 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                         child: FeelButton(
                           color: Colors.amber,
                           title: 'Buena Sensacion\nBuen Tiro',
-                          counter: _trainning.shotSecuence.where((element) => element == 'BB').length,
+                          counter: widget.trainning.shotSecuence.where((element) => element == 'BB').length,
                           onChanged: incrementCounter
                         ),
                       ),
@@ -55,7 +55,7 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                         child: FeelButton(
                           color: Colors.redAccent,
                           title: 'Buena Sensacion\nMal Tiro',
-                          counter: _trainning.shotSecuence.where((element) => element == 'BM').length,
+                          counter: widget.trainning.shotSecuence.where((element) => element == 'BM').length,
                           onChanged: incrementCounter
                         ),
                       )
@@ -69,7 +69,7 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                         child: FeelButton(
                           color: Colors.blue,
                           title: 'Mala Sensacion\nBuen Tiro',
-                          counter: _trainning.shotSecuence.where((element) => element == 'MB').length,
+                          counter: widget.trainning.shotSecuence.where((element) => element == 'MB').length,
                           onChanged: incrementCounter
                         ),
                       ),
@@ -77,7 +77,7 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                         child: FeelButton(
                           color: Colors.black,
                           title: 'Mala Sensacion\nMal Tiro',
-                          counter: _trainning.shotSecuence.where((element) => element == 'MM').length,
+                          counter: widget.trainning.shotSecuence.where((element) => element == 'MM').length,
                           onChanged: incrementCounter
                         ),
                       ),
@@ -89,7 +89,7 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
             Positioned(
               bottom:30.0,
               left: 30.0,
-              child: Text('Tiros: ${_trainning.shotSecuence.length} \nSeries: ${_trainning.series}',
+              child: Text('Tiros: ${widget.trainning.shotSecuence.length} \nSeries: ${widget.trainning.series}',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -135,8 +135,8 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                           icon: Icon(Icons.check, color: Colors.white),
                           tooltip: 'Ver resultados', 
                           onPress: (){
-                            _trainning.completeShotSecuence();
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => StatsPage(actualTrainning:_trainning)));
+                            widget.trainning.completeShotSecuence();
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => StatsPage(actualTrainning: widget.trainning)));
                           },
                         ),
                       ),
@@ -152,7 +152,9 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                           height: 50,
                           icon: Icon(Icons.home, color: Colors.white), 
                           tooltip: 'Home',
-                          onPress: (){},
+                          onPress: (){
+                            Navigator.pop(context);
+                          },
                         ),
                       ),
                     ),
@@ -211,38 +213,38 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
     switch (title) {
       case 'Buena Sensacion\nBuen Tiro':
         setState(() {
-          _trainning.shotSecuence.add('BB');
+          widget.trainning.shotSecuence.add('BB');
         });
         break;
       case 'Buena Sensacion\nMal Tiro':
         setState(() {
-          _trainning.shotSecuence.add('BM');
+          widget.trainning.shotSecuence.add('BM');
         });
         break;
       case 'Mala Sensacion\nBuen Tiro':
         setState(() {
-          _trainning.shotSecuence.add('MB');
+          widget.trainning.shotSecuence.add('MB');
         });  
         break;
       case 'Mala Sensacion\nMal Tiro':
         setState(() {
-          _trainning.shotSecuence.add('MM');
+          widget.trainning.shotSecuence.add('MM');
         });
         break;
       default:
     }
 
-    if ((_trainning.shotSecuence.length) > (_trainning.series * _trainning.arrowsPerEnd)){
+    if ((widget.trainning.shotSecuence.length) > (widget.trainning.series * widget.trainning.arrowsPerEnd)){
       setState(() {
-        _trainning.series++;
+        widget.trainning.series++;
       });
     }
   }
 
   void decrementCounter(){
     setState(() {
-      _trainning.shotSecuence.removeLast();
-      _trainning.series = (_trainning.shotSecuence.length / _trainning.arrowsPerEnd).round();
+      widget.trainning.shotSecuence.removeLast();
+      widget.trainning.series = (widget.trainning.shotSecuence.length / widget.trainning.arrowsPerEnd).round();
     });
   }
 }

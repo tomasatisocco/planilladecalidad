@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:planilla_de_calidad/classes/trainning.dart';
 
+// ignore: must_be_immutable
 class StatsPage extends StatelessWidget {
 
   final Trainning actualTrainning;

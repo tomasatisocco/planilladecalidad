@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:planilla_de_calidad/pages/levelOne.dart';
-import 'package:planilla_de_calidad/pages/levelTwo.dart';
-import 'package:planilla_de_calidad/pages/stats.dart';
+import 'package:planilla_de_calidad/pages/menuPage.dart';
 import 'classes/trainning.dart';
 
 void main() {
@@ -17,11 +15,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/LevelOne',
+      initialRoute: '/Menu',
       routes:{
-        '/LevelOne':(BuildContext context) => LevelOne(),
-        '/LevelTwo':(BuildContext context) => LevelTwoPage(),
-        '/Stats':(BuildContext context) => StatsPage(actualTrainning: Trainning(arrowsPerEnd: 6,technical: ''),),
+        '/Menu':(BuildContext context) => MenuPage(trainning: Trainning(arrowsPerEnd: 6, technical: 'hola bobo'),),
       }
     );
   }

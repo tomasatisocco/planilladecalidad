@@ -5,7 +5,9 @@ import 'package:planilla_de_calidad/widgets/circularButton.dart';
 import 'package:planilla_de_calidad/widgets/feelButton.dart';
 
 class LevelOne extends StatefulWidget {
-  LevelOne({Key? key}) : super(key: key);
+  LevelOne({Key? key, required this.trainning}) : super(key: key);
+
+  final Trainning trainning;
 
   @override
   _LevelOneState createState() => _LevelOneState();
@@ -16,8 +18,6 @@ class _LevelOneState extends State<LevelOne> with SingleTickerProviderStateMixin
   late AnimationController animationController;
   late Animation degOneTransformAnimation;
   late Animation rotationAnimation;
-
-  Trainning _trainning = Trainning(arrowsPerEnd: 6, technical: '');
 
   @override
   void initState() {
@@ -44,7 +44,7 @@ class _LevelOneState extends State<LevelOne> with SingleTickerProviderStateMixin
                   child: FeelButton(
                     color: Colors.green,
                     title: 'Buena Sensacion',
-                    counter: _trainning.shotSecuence.where((element) => element == 'B').length,
+                    counter: widget.trainning.shotSecuence.where((element) => element == 'B').length,
                     onChanged: incrementCounter,
                   ),
                 ),
@@ -52,7 +52,7 @@ class _LevelOneState extends State<LevelOne> with SingleTickerProviderStateMixin
                   child: FeelButton(
                     color: Colors.red,
                     title: 'Sensacion no Lograda',
-                    counter: _trainning.shotSecuence.where((element) => element == 'M').length,
+                    counter: widget.trainning.shotSecuence.where((element) => element == 'M').length,
                     onChanged: incrementCounter,
                   ),
                 ),
@@ -62,7 +62,7 @@ class _LevelOneState extends State<LevelOne> with SingleTickerProviderStateMixin
               bottom: 30.0,
               left: 30.0,
               child: Text(
-                'Tiros: ${_trainning.shotSecuence.length}\nSeries: ${_trainning.series}',
+                'Tiros: ${widget.trainning.shotSecuence.length}\nSeries: ${widget.trainning.series}',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
@@ -108,8 +108,8 @@ class _LevelOneState extends State<LevelOne> with SingleTickerProviderStateMixin
                           icon: Icon(Icons.check, color: Colors.white),
                           tooltip: 'Ver resultados', 
                           onPress: (){
-                            _trainning.completeShotSecuence();
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => StatsPage(actualTrainning:_trainning)));
+                            widget.trainning.completeShotSecuence();
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => StatsPage(actualTrainning:widget.trainning)));
                           },
                         ),
                       ),
@@ -125,7 +125,9 @@ class _LevelOneState extends State<LevelOne> with SingleTickerProviderStateMixin
                           height: 50,
                           icon: Icon(Icons.home, color: Colors.white), 
                           tooltip: 'Home',
-                          onPress: (){},
+                          onPress: (){
+                            Navigator.pop(context);
+                          },
                         ),
                       ),
                     ),
@@ -184,27 +186,27 @@ class _LevelOneState extends State<LevelOne> with SingleTickerProviderStateMixin
     switch (title) {
       case 'Buena Sensacion':
         setState(() {
-          _trainning.shotSecuence.add('B');
+          widget.trainning.shotSecuence.add('B');
         });
         break;
       case 'Sensacion no Lograda':
         setState(() {
-          _trainning.shotSecuence.add('M');
+          widget.trainning.shotSecuence.add('M');
         });
         break;
       default:
     }
-    if ((_trainning.shotSecuence.length) > (_trainning.series * _trainning.arrowsPerEnd)){
+    if ((widget.trainning.shotSecuence.length) > (widget.trainning.series * widget.trainning.arrowsPerEnd)){
       setState(() {
-        _trainning.series++;
+        widget.trainning.series++;
       });
     }
   }
 
   void decrementCounter(){
     setState(() {
-      _trainning.shotSecuence.removeLast();
-      _trainning.series = (_trainning.shotSecuence.length / _trainning.arrowsPerEnd).round();
+      widget.trainning.shotSecuence.removeLast();
+      widget.trainning.series = (widget.trainning.shotSecuence.length / widget.trainning.arrowsPerEnd).round();
     });
   }
 }
