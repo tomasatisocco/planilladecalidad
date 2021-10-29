@@ -15,6 +15,15 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
+
+  String value = 'Select';
+
+  List <String> technique = [
+    'Psicion de Pies','Agarre de Cuerda','Cuatro Pasos','Set','Brazo de Arco',
+    'Hombro de Arco','T','Set Up','Tensado','Anclaje','Transferencia','Holding',
+    'Moviemiento Escapular','Expansion - Apuntado','Suelta - Follow Through','Select'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +51,21 @@ class _MenuPageState extends State<MenuPage> {
                   });
                 },
               ),
-              Text('Technical Aspect'),
+              DropdownButton(
+                value: value,
+                items: technique.map((String item) {
+                  return DropdownMenuItem(
+                    value: item,
+                    child: Text(item),
+                  );
+                }).toList(),
+                onChanged: (String? newValue){
+                  setState(() {
+                    value = newValue!;
+                    //widget.trainning.technical = newValue;
+                  });
+                },
+              ),
               TextButton(
                 child: Text('Level One'),
                 onPressed: (){

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class Trainning{
-  int arrowsPerEnd;
+  int arrowsPerEnd = 6;
   int series = 0;
-  String technical;
+  String technical = 'Select';
   List <String> shotSecuence = [];
   DateTime date = DateTime.now();
 
-  Trainning({required this.arrowsPerEnd, required this.technical});
+  Trainning();
 
   void completeShotSecuence(){
     int i = shotSecuence.length;

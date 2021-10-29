@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/Menu',
       routes:{
-        '/Menu':(BuildContext context) => MenuPage(trainning: Trainning(arrowsPerEnd: 6, technical: 'hola bobo'),),
+        '/Menu':(BuildContext context) => MenuPage(trainning: Trainning()),
       }
     );
   }
