@@ -62,20 +62,22 @@ class _MenuPageState extends State<MenuPage> {
                 onChanged: (String? newValue){
                   setState(() {
                     value = newValue!;
-                    //widget.trainning.technical = newValue;
+                    widget.trainning.technical = newValue;
                   });
                 },
               ),
               TextButton(
                 child: Text('Level One'),
                 onPressed: (){
+                  Navigator.of(context).pop();
                   Navigator.push(context, MaterialPageRoute(builder: (context) => LevelOne(trainning: widget.trainning,)));
                 },
               ),
               TextButton(
                 child: Text('Level Two'),
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LevelTwoPage(trainning: widget.trainning,)));
+                  Navigator.of(context).pop();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LevelTwoPage(trainning: widget.trainning)));
                 },
               ),
               TextButton(

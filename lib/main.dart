@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:planilla_de_calidad/pages/menuPage.dart';
-import 'classes/trainning.dart';
+import 'package:planilla_de_calidad/pages/trainningsPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,9 +14,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/Menu',
+      initialRoute: '/Trainnings',
       routes:{
-        '/Menu':(BuildContext context) => MenuPage(trainning: Trainning()),
+        '/Trainnings':(BuildContext context) => TrainningsPage(),
       }
     );
   }
