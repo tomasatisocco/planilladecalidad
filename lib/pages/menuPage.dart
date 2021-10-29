@@ -28,11 +28,19 @@ class _MenuPageState extends State<MenuPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text('AA Image Assets'),
-              Row(
-                children: <Widget>[
-                  Text('Flechas por Serie: '),
-
-                ],
+              Slider(
+                min: 1,
+                max: 18,
+                divisions: 18,
+                value: widget.trainning.arrowsPerEnd.toDouble(),
+                label: '${widget.trainning.arrowsPerEnd}',
+                activeColor: Colors.amber,
+                inactiveColor: Colors.black,
+                onChanged: (value){
+                  setState(() {
+                    widget.trainning.arrowsPerEnd = value.toInt();
+                  });
+                },
               ),
               Text('Technical Aspect'),
               TextButton(
