@@ -5,6 +5,7 @@ class Trainning{
   int series = 0;
   String technical;
   List <String> shotSecuence = [];
+  DateTime date = DateTime.now();
 
   Trainning({required this.arrowsPerEnd, required this.technical});
 

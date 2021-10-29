@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:planilla_de_calidad/classes/trainning.dart';
 import 'package:planilla_de_calidad/pages/levelOne.dart';
 import 'package:planilla_de_calidad/pages/levelTwo.dart';
@@ -44,6 +45,23 @@ class _MenuPageState extends State<MenuPage> {
                 child: Text('Level Two'),
                 onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => LevelTwoPage(trainning: widget.trainning,)));
+                },
+              ),
+              TextButton(
+                child: Text(widget.trainning.date.toString().substring(0,10)),
+                onPressed: (){
+                  DatePicker.showDatePicker(context,
+                    showTitleActions: true,
+                    minTime: DateTime(2015, 1, 1),
+                    maxTime: DateTime(2030, 12, 24),
+                    onConfirm: (date){
+                      setState(() {
+                        widget.trainning.date = date;
+                      });
+                    },
+                    currentTime: DateTime.now(),
+                    locale: LocaleType.es         
+                  );
                 },
               ),
             ],

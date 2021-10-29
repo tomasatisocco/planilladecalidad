@@ -4,17 +4,17 @@ import 'package:planilla_de_calidad/classes/trainning.dart';
 // ignore: must_be_immutable
 class StatsPage extends StatelessWidget {
 
-  final Trainning actualTrainning;
+  final Trainning trainning;
 
-  late List<String> _mediasPerEnd = List.generate(((actualTrainning.shotSecuence.length) / actualTrainning.arrowsPerEnd).round(), 
+  late List<String> _mediasPerEnd = List.generate(((trainning.shotSecuence.length) / trainning.arrowsPerEnd).round(), 
     (index) =>
-      ((actualTrainning.shotSecuence.sublist(
-        index * actualTrainning.arrowsPerEnd,
-        (index * actualTrainning.arrowsPerEnd) + actualTrainning.arrowsPerEnd)
-        .where((element) => element == 'BB' || element == 'B').length / actualTrainning.arrowsPerEnd)*100).toStringAsFixed(1) + '%'
+      ((trainning.shotSecuence.sublist(
+        index * trainning.arrowsPerEnd,
+        (index * trainning.arrowsPerEnd) + trainning.arrowsPerEnd)
+        .where((element) => element == 'BB' || element == 'B').length / trainning.arrowsPerEnd)*100).toStringAsFixed(1) + '%'
   );
 
-  StatsPage({Key? key, required this.actualTrainning,}) : super(key: key);
+  StatsPage({Key? key, required this.trainning,}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class StatsPage extends StatelessWidget {
         centerTitle: true,
         leading: BackButton(
           onPressed: (){
-            actualTrainning.removeBlanks();
+            trainning.removeBlanks();
             Navigator.pop(context);
           }  
         ),
@@ -34,11 +34,11 @@ class StatsPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             Text('Hola'),
+            Text('Fecha: ${trainning.date.toString().substring(0,10)}'),
             Expanded(
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
-                //shrinkWrap: true,
-                itemCount: ((actualTrainning.shotSecuence.length / actualTrainning.arrowsPerEnd).round()),
+                itemCount: ((trainning.shotSecuence.length / trainning.arrowsPerEnd).round()),
                 itemBuilder:(context, index1) => SizedBox(
                   height: 50,
                   child: Row(
@@ -48,7 +48,7 @@ class StatsPage extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         scrollDirection: Axis.horizontal,
                        shrinkWrap: true,
-                        itemCount: actualTrainning.arrowsPerEnd,
+                        itemCount: trainning.arrowsPerEnd,
                         itemBuilder: (context, index) => 
                           Container(
                             height: 40,
@@ -57,9 +57,9 @@ class StatsPage extends StatelessWidget {
                             margin: EdgeInsets.all(5),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              color: actualTrainning.shotColor(actualTrainning.shotSecuence[index1 * actualTrainning.arrowsPerEnd + index]),
+                              color: trainning.shotColor(trainning.shotSecuence[index1 * trainning.arrowsPerEnd + index]),
                             ),
-                            child: Text(actualTrainning.shotSecuence[index1 * actualTrainning.arrowsPerEnd + index],
+                            child: Text(trainning.shotSecuence[index1 * trainning.arrowsPerEnd + index],
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,

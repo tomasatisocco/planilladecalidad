@@ -109,7 +109,7 @@ class _LevelOneState extends State<LevelOne> with SingleTickerProviderStateMixin
                           tooltip: 'Ver resultados', 
                           onPress: (){
                             widget.trainning.completeShotSecuence();
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => StatsPage(actualTrainning:widget.trainning)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => StatsPage(trainning:widget.trainning)));
                           },
                         ),
                       ),
