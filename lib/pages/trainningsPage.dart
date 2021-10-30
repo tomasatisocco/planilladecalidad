@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:planilla_de_calidad/classes/trainning.dart';
 import 'package:planilla_de_calidad/pages/menuPage.dart';
@@ -16,7 +18,7 @@ class _TrainningsPageState extends State<TrainningsPage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => MenuPage(trainning: Trainning())));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => MenuPage(trainning: Trainning(id: Random().nextInt(99999999).toString()))));
         },
       ),
     );
