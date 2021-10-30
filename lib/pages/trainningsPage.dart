@@ -18,7 +18,20 @@ class _TrainningsPageState extends State<TrainningsPage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => MenuPage(trainning: Trainning(id: Random().nextInt(99999999).toString()))));
+          Navigator.push(
+            context, MaterialPageRoute(
+              builder: (context) => MenuPage(
+                trainning: Trainning(
+                  id: Random().nextInt(99999999).toString(),
+                  arrowsPerEnd: 6,
+                  date: DateTime.now(),
+                  series: 0,
+                  shotSecuence: [],
+                  technical: 'Select'
+                )
+              )
+            )
+          );
         },
       ),
     );

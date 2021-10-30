@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 
 class Trainning{
   String id;
-  int arrowsPerEnd = 6;
-  int series = 0;
-  String technical = 'Select';
-  List <String> shotSecuence = [];
-  DateTime date = DateTime.now();
+  int arrowsPerEnd;
+  int series ;
+  String technical;
+  List <String> shotSecuence;
+  DateTime date;
 
-  Trainning({required this.id});
+  Trainning({
+    required this.id, required this.arrowsPerEnd, required this.series, 
+    required this.technical, required this.shotSecuence, required this.date
+  });
 
   void completeShotSecuence(){
     int i = shotSecuence.length;
@@ -48,4 +51,23 @@ class Trainning{
   void removeBlanks(){
     shotSecuence.removeWhere((element) => element == '');
   }
+
+  factory Trainning.formJson(Map<String, dynamic> jsonFile) => Trainning(
+    id: jsonFile["id"],
+    arrowsPerEnd : jsonFile["arrowsPerEnd"],
+    series: jsonFile["series"],
+    technical: jsonFile["technical"],
+    shotSecuence: jsonFile["shotSecuence"],
+    date: jsonFile["date"],
+  );
+
+  Map<String, dynamic> toJson() =>{
+    "id": id,
+    "arrowsPerEnd": arrowsPerEnd,
+    "series": series,
+    "technical": technical,
+    "shotSecuence": shotSecuence,
+    "date": date
+  };
+  
 }
