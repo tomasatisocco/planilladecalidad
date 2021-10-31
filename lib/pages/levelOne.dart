@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:planilla_de_calidad/classes/dataBase.dart';
 import 'package:planilla_de_calidad/classes/trainning.dart';
 import 'package:planilla_de_calidad/pages/stats.dart';
 import 'package:planilla_de_calidad/widgets/circularButton.dart';
 import 'package:planilla_de_calidad/widgets/feelButton.dart';
 
 class LevelOne extends StatefulWidget {
-  LevelOne({Key? key, required this.trainning}) : super(key: key);
+  LevelOne({Key? key, required this.trainning, required this.database}) : super(key: key);
 
   final Trainning trainning;
+  final Database database;
 
   @override
   _LevelOneState createState() => _LevelOneState();

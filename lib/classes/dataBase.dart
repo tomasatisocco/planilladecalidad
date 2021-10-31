@@ -28,7 +28,7 @@ class DatabaseFileRoutines{
 
   Future<File> get _localFile async{
     final path = await _localPath;
-
+    print(path);
     return File('$path/localDB.json');
   }
 
@@ -36,7 +36,7 @@ class DatabaseFileRoutines{
     final file = await _localFile;
 
     try {
-      file.writeAsString(json);
+      file.writeAsString('$json');
     } catch (e) {
       print("$e");
     }
@@ -48,7 +48,7 @@ class DatabaseFileRoutines{
 
       if(!file.existsSync()){
         print('File does not exist: ${file.absolute}');
-        await writeDataBase('{"trainnings":[]}}');
+        await writeDataBase('{"trainnings": []}');
       }
       String content = await file.readAsString();
       return content;
@@ -60,7 +60,7 @@ class DatabaseFileRoutines{
   }
 }
 
-Database databaseFronJson(String string){
+Database databaseFromJson(String string){
   final dataFromJson  = json.decode(string);
   return Database.fromJson(dataFromJson);
 }

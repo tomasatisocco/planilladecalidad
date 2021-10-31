@@ -5,8 +5,8 @@ class Trainning{
   int arrowsPerEnd;
   int series ;
   String technical;
-  List <String> shotSecuence;
-  DateTime date;
+  List<String> shotSecuence;
+  String date;
 
   Trainning({
     required this.id, required this.arrowsPerEnd, required this.series, 
@@ -57,7 +57,7 @@ class Trainning{
     arrowsPerEnd : jsonFile["arrowsPerEnd"],
     series: jsonFile["series"],
     technical: jsonFile["technical"],
-    shotSecuence: jsonFile["shotSecuence"],
+    shotSecuence: jsonFile["shotSecuence[]"],
     date: jsonFile["date"],
   );
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:planilla_de_calidad/classes/dataBase.dart';
 import 'package:planilla_de_calidad/classes/trainning.dart';
 import 'package:planilla_de_calidad/pages/stats.dart';
 import 'package:planilla_de_calidad/widgets/feelButton.dart';
@@ -6,8 +7,9 @@ import 'package:planilla_de_calidad/widgets/circularButton.dart';
 
 class LevelTwoPage extends StatefulWidget {
   final Trainning trainning;
+  final Database database;
 
-  LevelTwoPage({Key? key, required this.trainning}) : super(key: key);
+  LevelTwoPage({Key? key, required this.trainning, required this.database}) : super(key: key);
 
   @override
   _LevelTwoPageState createState() => _LevelTwoPageState();

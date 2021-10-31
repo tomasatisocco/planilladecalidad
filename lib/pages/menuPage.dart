@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:planilla_de_calidad/classes/dataBase.dart';
 import 'package:planilla_de_calidad/classes/trainning.dart';
 import 'package:planilla_de_calidad/pages/levelOne.dart';
 import 'package:planilla_de_calidad/pages/levelTwo.dart';
@@ -7,8 +8,9 @@ import 'package:planilla_de_calidad/pages/levelTwo.dart';
 class MenuPage extends StatefulWidget {
 
   final Trainning trainning;
+  final Database database;
 
-  MenuPage({Key? key, required this.trainning}) : super(key: key);
+  MenuPage({Key? key, required this.trainning, required this.database}) : super(key: key);
 
   @override
   _MenuPageState createState() => _MenuPageState();
@@ -70,14 +72,19 @@ class _MenuPageState extends State<MenuPage> {
                 child: Text('Level One'),
                 onPressed: (){
                   Navigator.of(context).pop();
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LevelOne(trainning: widget.trainning,)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LevelOne(trainning: widget.trainning, database: widget.database,)));
                 },
               ),
               TextButton(
                 child: Text('Level Two'),
                 onPressed: (){
+                  setState(() {
+                    widget.database.trainningsDB.last.shotSecuence = [""];
+                    widget.database.trainningsDB.last = widget.trainning;
+                  });
+                  DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
                   Navigator.of(context).pop();
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LevelTwoPage(trainning: widget.trainning)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LevelTwoPage(trainning: widget.trainning, database: widget.database,)));
                 },
               ),
               TextButton(
@@ -89,7 +96,7 @@ class _MenuPageState extends State<MenuPage> {
                     maxTime: DateTime(2030, 12, 24),
                     onConfirm: (date){
                       setState(() {
-                        widget.trainning.date = date;
+                        widget.trainning.date = date.toString();
                       });
                     },
                     currentTime: DateTime.now(),
