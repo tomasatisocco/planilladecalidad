@@ -26,7 +26,17 @@ class _TrainningsPageState extends State<TrainningsPage> {
           builder: (BuildContext context, AsyncSnapshot snapshot){
             return !snapshot.hasData
             ? Center(child: CircularProgressIndicator())
-            : Text(estetesto);
+            : ListView.separated(
+              itemCount: snapshot.data.length,
+              separatorBuilder: (BuildContext context, int index){
+                return Divider(
+                  color: Colors.black,
+                );
+              }, 
+              itemBuilder: (BuildContext context, int index){
+                return Text(snapshot.data[index].arrowsPerEnd.toString());
+              },
+            );
           }
         ),
       ),

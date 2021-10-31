@@ -100,7 +100,7 @@ class _MenuPageState extends State<MenuPage> {
                       });
                     },
                     currentTime: DateTime.now(),
-                    locale: LocaleType.es         
+                    locale: LocaleType.es,   
                   );
                 },
               ),
