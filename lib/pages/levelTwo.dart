@@ -8,8 +8,9 @@ import 'package:planilla_de_calidad/widgets/circularButton.dart';
 class LevelTwoPage extends StatefulWidget {
   final Trainning trainning;
   final Database database;
+  final int index;
 
-  LevelTwoPage({Key? key, required this.trainning, required this.database}) : super(key: key);
+  LevelTwoPage({Key? key, required this.trainning, required this.database, required this.index}) : super(key: key);
 
   @override
   _LevelTwoPageState createState() => _LevelTwoPageState();
@@ -241,12 +242,19 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
         widget.trainning.series++;
       });
     }
+
+    setState(() {
+      widget.database.trainningsDB[widget.index] = widget.trainning;
+    });
+    DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
   }
 
   void decrementCounter(){
     setState(() {
       widget.trainning.shotSecuence.removeLast();
       widget.trainning.series = (widget.trainning.shotSecuence.length / widget.trainning.arrowsPerEnd).round();
+      widget.database.trainningsDB[widget.index] = widget.trainning;
     });
+    DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
   }
 }

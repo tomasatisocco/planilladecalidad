@@ -6,10 +6,11 @@ import 'package:planilla_de_calidad/widgets/circularButton.dart';
 import 'package:planilla_de_calidad/widgets/feelButton.dart';
 
 class LevelOne extends StatefulWidget {
-  LevelOne({Key? key, required this.trainning, required this.database}) : super(key: key);
+  LevelOne({Key? key, required this.trainning, required this.database, required this.index}) : super(key: key);
 
   final Trainning trainning;
   final Database database;
+  final int index;
 
   @override
   _LevelOneState createState() => _LevelOneState();
@@ -189,6 +190,7 @@ class _LevelOneState extends State<LevelOne> with SingleTickerProviderStateMixin
       case 'Buena Sensacion':
         setState(() {
           widget.trainning.shotSecuence.add('B');
+          widget.database.trainningsDB[widget.index] = widget.trainning;
         });
         break;
       case 'Sensacion no Lograda':
@@ -198,17 +200,26 @@ class _LevelOneState extends State<LevelOne> with SingleTickerProviderStateMixin
         break;
       default:
     }
+    DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
+
     if ((widget.trainning.shotSecuence.length) > (widget.trainning.series * widget.trainning.arrowsPerEnd)){
       setState(() {
         widget.trainning.series++;
       });
     }
+
+    setState(() {
+      widget.database.trainningsDB[widget.index] = widget.trainning;
+    });
+    DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
   }
 
   void decrementCounter(){
     setState(() {
       widget.trainning.shotSecuence.removeLast();
       widget.trainning.series = (widget.trainning.shotSecuence.length / widget.trainning.arrowsPerEnd).round();
-    });
+      widget.database.trainningsDB[widget.index] = widget.trainning;
+    });    
+    DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
   }
 }
