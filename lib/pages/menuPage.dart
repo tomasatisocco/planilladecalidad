@@ -71,6 +71,10 @@ class _MenuPageState extends State<MenuPage> {
               TextButton(
                 child: Text('Level One'),
                 onPressed: (){
+                  setState(() {
+                    widget.database.trainningsDB.last = widget.trainning;
+                  });
+                  DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
                   Navigator.of(context).pop();
                   Navigator.push(context, MaterialPageRoute(builder: (context) => LevelOne(trainning: widget.trainning, database: widget.database,)));
                 },
@@ -79,8 +83,6 @@ class _MenuPageState extends State<MenuPage> {
                 child: Text('Level Two'),
                 onPressed: (){
                   setState(() {
-                    widget.database.trainningsDB.last.shotSecuence.add('B');
-                    widget.database.trainningsDB.last.shotSecuence.add('B');
                     widget.database.trainningsDB.last = widget.trainning;
                   });
                   DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
