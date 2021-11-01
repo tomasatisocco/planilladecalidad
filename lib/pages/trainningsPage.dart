@@ -2,6 +2,8 @@ import 'dart:math';
 import 'package:planilla_de_calidad/classes/dataBase.dart';
 import 'package:flutter/material.dart';
 import 'package:planilla_de_calidad/classes/trainning.dart';
+import 'package:planilla_de_calidad/pages/levelOne.dart';
+import 'package:planilla_de_calidad/pages/levelTwo.dart';
 import 'package:planilla_de_calidad/pages/menuPage.dart';
 import 'package:intl/intl.dart';
 
@@ -46,6 +48,29 @@ class _TrainningsPageState extends State<TrainningsPage> {
                   subtitle: Text(
                     snapshot.data[index].trainningProm
                   ),
+                  onTap: (){
+                    if((_database.trainningsDB[index].shotSecuence.contains('B')) || (_database.trainningsDB[index].shotSecuence.contains('M'))){
+                      Navigator.push(
+                        context, MaterialPageRoute(
+                          builder: (context) => LevelOne(
+                            database: _database,
+                            trainning: _database.trainningsDB[index],
+                            index: index,
+                          )
+                        )
+                      );
+                    } else {
+                      Navigator.push(
+                        context, MaterialPageRoute(
+                          builder: (context) => LevelTwoPage(
+                            database: _database,
+                            trainning: _database.trainningsDB[index],
+                            index: index,
+                          )
+                        )
+                      );
+                    }
+                  },
                 );
               },
             );
