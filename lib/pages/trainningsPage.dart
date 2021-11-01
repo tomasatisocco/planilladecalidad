@@ -3,6 +3,7 @@ import 'package:planilla_de_calidad/classes/dataBase.dart';
 import 'package:flutter/material.dart';
 import 'package:planilla_de_calidad/classes/trainning.dart';
 import 'package:planilla_de_calidad/pages/menuPage.dart';
+import 'package:intl/intl.dart';
 
 class TrainningsPage extends StatefulWidget {
   TrainningsPage({Key? key}) : super(key: key);
@@ -14,7 +15,6 @@ class TrainningsPage extends StatefulWidget {
 class _TrainningsPageState extends State<TrainningsPage> {
 
   late Database _database;
-  String estetesto = "jola";
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,19 @@ class _TrainningsPageState extends State<TrainningsPage> {
                 );
               }, 
               itemBuilder: (BuildContext context, int index){
-                return Text(snapshot.data[index].arrowsPerEnd.toString());
+                return ListTile(
+                  leading: Column(
+                    children: <Widget>[
+                      Text(DateFormat.yMd().format(DateTime.parse(snapshot.data[index].date)))
+                    ],
+                  ),
+                  title: Text(
+                    snapshot.data[index].technical
+                  ),
+                  subtitle: Text(
+                    snapshot.data[index].shotSecuence.toString()
+                  ),
+                );
               },
             );
           }

@@ -79,7 +79,8 @@ class _MenuPageState extends State<MenuPage> {
                 child: Text('Level Two'),
                 onPressed: (){
                   setState(() {
-                    widget.database.trainningsDB.last.shotSecuence = [""];
+                    widget.database.trainningsDB.last.shotSecuence.add('B');
+                    widget.database.trainningsDB.last.shotSecuence.add('B');
                     widget.database.trainningsDB.last = widget.trainning;
                   });
                   DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));

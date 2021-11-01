@@ -5,7 +5,7 @@ class Trainning{
   int arrowsPerEnd;
   int series ;
   String technical;
-  List<String> shotSecuence;
+  List<dynamic> shotSecuence;
   String date;
 
   Trainning({
@@ -20,6 +20,11 @@ class Trainning{
       shotSecuence.length = series * arrowsPerEnd;
       shotSecuence.fillRange(i, shotSecuence.length, '');
     }
+  }
+
+  String trainningProm(){
+    String _prom =  shotSecuence.length.toString();
+    return _prom;
   }
 
   Color shotColor(String shot){
@@ -57,7 +62,7 @@ class Trainning{
     arrowsPerEnd : jsonFile["arrowsPerEnd"],
     series: jsonFile["series"],
     technical: jsonFile["technical"],
-    shotSecuence: jsonFile["shotSecuence[]"],
+    shotSecuence: jsonFile["shotSecuence"],
     date: jsonFile["date"],
   );
 
