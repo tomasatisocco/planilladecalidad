@@ -58,7 +58,7 @@ class _TrainningsPageState extends State<TrainningsPage> {
                             index: index,
                           )
                         )
-                      );
+                      ).then((value) => setState((){}));
                     } else {
                       Navigator.push(
                         context, MaterialPageRoute(
@@ -68,7 +68,7 @@ class _TrainningsPageState extends State<TrainningsPage> {
                             index: index,
                           )
                         )
-                      );
+                      ).then((value) => setState((){}));
                     }
                   },
                 );

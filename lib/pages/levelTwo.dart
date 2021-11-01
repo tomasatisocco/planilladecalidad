@@ -156,7 +156,7 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
                           icon: Icon(Icons.home, color: Colors.white), 
                           tooltip: 'Home',
                           onPress: (){
-                            Navigator.pop(context);
+                            Navigator.popUntil(context, ModalRoute.withName('/Trainnings'));
                           },
                         ),
                       ),

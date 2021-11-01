@@ -129,7 +129,7 @@ class _LevelOneState extends State<LevelOne> with SingleTickerProviderStateMixin
                           icon: Icon(Icons.home, color: Colors.white), 
                           tooltip: 'Home',
                           onPress: (){
-                            Navigator.pop(context);
+                            Navigator.popUntil(context, ModalRoute.withName('/Trainnings'));
                           },
                         ),
                       ),

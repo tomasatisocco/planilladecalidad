@@ -75,7 +75,6 @@ class _MenuPageState extends State<MenuPage> {
                     widget.database.trainningsDB.last = widget.trainning;
                   });
                   DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
-                  Navigator.of(context).pop();
                   Navigator.push(context, MaterialPageRoute(builder: (context) => LevelOne(trainning: widget.trainning, database: widget.database, index: widget.database.trainningsDB.length - 1)));
                 },
               ),
@@ -86,8 +85,7 @@ class _MenuPageState extends State<MenuPage> {
                     widget.database.trainningsDB.last = widget.trainning;
                   });
                   DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
-                  Navigator.of(context).pop();
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LevelTwoPage(trainning: widget.trainning, database: widget.database, index: widget.database.trainningsDB.length)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LevelTwoPage(trainning: widget.trainning, database: widget.database, index: widget.database.trainningsDB.length - 1)));
                 },
               ),
               TextButton(
