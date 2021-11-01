@@ -71,6 +71,49 @@ class _TrainningsPageState extends State<TrainningsPage> {
                       ).then((value) => setState((){}));
                     }
                   },
+                  onLongPress: (){
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text('Eliminar'),
+                          content: Text('Desea Eliminar Este Entrenamiento?'),
+                          backgroundColor: Colors.blue[600],
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text('Cancelar',style: 
+                                TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              onPressed: (){
+                                Navigator.pop(context);
+                              }
+                            ),
+                            SizedBox(
+                              width: 150,
+                            ),
+                            TextButton(
+                              child: Text('Eliminar',
+                                style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold
+                                ),
+                              ),
+                              onPressed: (){
+                                setState(() {
+                                  _database.trainningsDB.removeAt(index);                                  
+                                });
+                                DatabaseFileRoutines().writeDataBase(databaseToJson(_database));
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        );
+                      }
+                    );
+                  },
                 );
               },
             );
