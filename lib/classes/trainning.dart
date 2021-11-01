@@ -23,8 +23,8 @@ class Trainning{
   }
 
   String get trainningProm{
-    String _prom =  shotSecuence.length.toString();
-    return _prom;
+    String _prom = ((shotSecuence.where((element) => element == 'B' || element == 'BB').length / shotSecuence.length) * 100).toStringAsFixed(2);
+    return _prom + '%';
   }
 
   Color shotColor(String shot){
