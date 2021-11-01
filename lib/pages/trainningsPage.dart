@@ -44,7 +44,7 @@ class _TrainningsPageState extends State<TrainningsPage> {
                     snapshot.data[index].technical
                   ),
                   subtitle: Text(
-                    snapshot.data[index].shotSecuence.toString()
+                    snapshot.data[index].trainningProm
                   ),
                 );
               },
@@ -72,7 +72,7 @@ class _TrainningsPageState extends State<TrainningsPage> {
                 trainning: _database.trainningsDB.last,
               )
             )
-          );
+          ).then((_) => setState((){}));
         },
       ),
     );

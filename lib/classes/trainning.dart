@@ -22,7 +22,7 @@ class Trainning{
     }
   }
 
-  String trainningProm(){
+  String get trainningProm{
     String _prom =  shotSecuence.length.toString();
     return _prom;
   }
