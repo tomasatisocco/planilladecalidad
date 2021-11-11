@@ -1,16 +1,22 @@
-# planilla_de_calidad
+# Planilla de Calidad
+This is a trainnig app focused on the sport of archery.
 
-A new Flutter project.
+---
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Functions
+The principal use of this app ir to choice a thecnial aspect to work in your trainning and go in one of the two availables levels.
+### Level One
+In level One make your shot an mark it in the app as good feeling or bad feeling.
+### Level Two
+In level Two yo can mark your shots as: 
+* Good Feeling - Good Shot 
+* Good Feeling - Bad Shot
+* Bad Feeling - Good Shot
+* Bad Feeling - Bad Shot
+## Features
+* In the app the trainnings are stored in the local storege.
+* Stats: Diferent Stats of your trainning are shown in the Stats Page.
+## Future
+Future features include:
+* FireBase Storage.
+* Integration with the archery club app (Where other tools are hosted).
