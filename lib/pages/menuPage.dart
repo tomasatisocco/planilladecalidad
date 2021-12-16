@@ -38,58 +38,12 @@ class _MenuPageState extends State<MenuPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Text('AA Image Assets'),
-              Slider(
-                min: 1,
-                max: 18,
-                divisions: 18,
-                value: widget.trainning.arrowsPerEnd.toDouble(),
-                label: '${widget.trainning.arrowsPerEnd}',
-                activeColor: Colors.amber,
-                inactiveColor: Colors.black,
-                onChanged: (value){
-                  setState(() {
-                    widget.trainning.arrowsPerEnd = value.toInt();
-                  });
-                },
-              ),
-              DropdownButton(
-                value: value,
-                items: technique.map((String item) {
-                  return DropdownMenuItem(
-                    value: item,
-                    child: Text(item),
-                  );
-                }).toList(),
-                onChanged: (String? newValue){
-                  setState(() {
-                    value = newValue!;
-                    widget.trainning.technical = newValue;
-                  });
-                },
-              ),
+              SizedBox(height: 20),
+              Image(image: AssetImage('assets/AALogo.png'),width: 100,),
+              SizedBox(height: 20),
+              Text('DATE',textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade300, fontWeight: FontWeight.bold, fontSize: 17),),
               TextButton(
-                child: Text('Level One'),
-                onPressed: (){
-                  setState(() {
-                    widget.database.trainningsDB.last = widget.trainning;
-                  });
-                  DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LevelOne(trainning: widget.trainning, database: widget.database, index: widget.database.trainningsDB.length - 1)));
-                },
-              ),
-              TextButton(
-                child: Text('Level Two'),
-                onPressed: (){
-                  setState(() {
-                    widget.database.trainningsDB.last = widget.trainning;
-                  });
-                  DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LevelTwoPage(trainning: widget.trainning, database: widget.database, index: widget.database.trainningsDB.length - 1)));
-                },
-              ),
-              TextButton(
-                child: Text(widget.trainning.date.toString().substring(0,10)),
+                child: Text(widget.trainning.date.toString().substring(0,10), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
                 onPressed: (){
                   DatePicker.showDatePicker(context,
                     showTitleActions: true,
@@ -105,10 +59,72 @@ class _MenuPageState extends State<MenuPage> {
                   );
                 },
               ),
+              SizedBox(height: 20,),
+              Text('ARROWS PER END',textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade300, fontWeight: FontWeight.bold, fontSize: 17),),
+              Slider(
+                min: 1,
+                max: 18,
+                divisions: 18,
+                value: widget.trainning.arrowsPerEnd.toDouble(),
+                label: '${widget.trainning.arrowsPerEnd}',
+                activeColor: Colors.white,
+                inactiveColor: Colors.black,
+                onChanged: (value){
+                  setState(() {
+                    widget.trainning.arrowsPerEnd = value.toInt();
+                  });
+                },
+              ),
+              Text('TECHNICAL',textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade300, fontWeight: FontWeight.bold, fontSize: 17),),
+              DropdownButton(
+                value: value,
+                items: technique.map((String item) {
+                  return DropdownMenuItem(
+                    value: item,
+                    child: Text(item, style: TextStyle(color: Colors.white))
+                  );
+                }).toList(),
+                onChanged: (String? newValue){
+                  setState(() {
+                    value = newValue!;
+                    widget.trainning.technical = newValue;
+                  });
+                },
+              ),
+              SizedBox(height: 20),
+              Text('CHOOSE LEVEL',textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade300, fontWeight: FontWeight.bold, fontSize: 17),),
+              SizedBox(height: 15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    child: Text('Level\n1',textAlign: TextAlign.center,),
+                    onPressed: (){
+                      setState(() {
+                        widget.database.trainningsDB.last = widget.trainning;
+                      });
+                      DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => LevelOne(trainning: widget.trainning, database: widget.database, index: widget.database.trainningsDB.length - 1)));
+                    },
+                  ),
+                  SizedBox(width: 20,),
+                  ElevatedButton(
+                    child: Text('Level\n2',textAlign: TextAlign.center,),
+                    onPressed: (){
+                  setState(() {
+                    widget.database.trainningsDB.last = widget.trainning;
+                  });
+                  DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => LevelTwoPage(trainning: widget.trainning, database: widget.database, index: widget.database.trainningsDB.length - 1)));
+                },
+                  ),
+                ],
+              ),
             ],
           ),
         ),
       ),
+      backgroundColor: Colors.blueGrey,
     );
   }
 }
