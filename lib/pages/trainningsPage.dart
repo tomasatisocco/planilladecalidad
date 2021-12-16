@@ -21,6 +21,10 @@ class _TrainningsPageState extends State<TrainningsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text('Trainning List'),
+      ),
       body: SafeArea(
         child: FutureBuilder(
           initialData: [],
@@ -32,14 +36,18 @@ class _TrainningsPageState extends State<TrainningsPage> {
               itemCount: snapshot.data.length,
               separatorBuilder: (BuildContext context, int index){
                 return Divider(
-                  color: Colors.black,
+                  color: Colors.blueAccent,
                 );
               }, 
               itemBuilder: (BuildContext context, int index){
                 return ListTile(
                   leading: Column(
-                    children: <Widget>[
-                      Text(DateFormat.yMd().format(DateTime.parse(snapshot.data[index].date)))
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if(snapshot.data[index].shotSecuence.contains('B') || snapshot.data[index].shotSecuence.contains('M'))
+                        Text('Level\n1', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold)),
+                      if(!(snapshot.data[index].shotSecuence.contains('B') || snapshot.data[index].shotSecuence.contains('M')))
+                        Text('Level\n2', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold)),
                     ],
                   ),
                   title: Text(
@@ -48,6 +56,7 @@ class _TrainningsPageState extends State<TrainningsPage> {
                   subtitle: Text(
                     snapshot.data[index].trainningProm
                   ),
+                  trailing: Text(DateFormat.yMd().format(DateTime.parse(snapshot.data[index].date))),
                   onTap: (){
                     if((_database.trainningsDB[index].shotSecuence.contains('B')) || (_database.trainningsDB[index].shotSecuence.contains('M'))){
                       Navigator.push(
