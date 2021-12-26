@@ -79,16 +79,17 @@ class StatsPage extends StatelessWidget {
                 itemBuilder:(context, index1) => SizedBox(
                   height: 50,
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('${index1 + 1}'),
                       ListView.builder(
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
                         itemCount: trainning.arrowsPerEnd,
-                        itemBuilder: (context, index) => 
-                          Container(
-                            height: 40,
-                            width: 40,
+                        itemBuilder: (context, index) {
+                          if (trainning.arrowsPerEnd < 9){
+                            return Container(
+                            constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height,minHeight: 0.0,maxWidth: MediaQuery.of(context).size.width/(trainning.arrowsPerEnd + 5),minWidth: 0.0),
                             alignment: Alignment.center,
                             margin: EdgeInsets.all(5),
                             decoration: BoxDecoration(
@@ -96,14 +97,26 @@ class StatsPage extends StatelessWidget {
                               color: trainning.shotColor(trainning.shotSecuence[index1 * trainning.arrowsPerEnd + index]),
                             ),
                             child: Text(trainning.shotSecuence[index1 * trainning.arrowsPerEnd + index],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                        ),
+                          );
+                          } else {
+                            return Container(
+                            constraints: BoxConstraints(maxHeight: MediaQuery.of(context).size.height,minHeight: 0.0,maxWidth: MediaQuery.of(context).size.width/((trainning.arrowsPerEnd - 4) * 2),minWidth: 0.0),
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: trainning.shotColor(trainning.shotSecuence[index1 * trainning.arrowsPerEnd + index]),
+                            ),
+                          );
+                          }
+                        },
                       ),
                      Text(_mediasPerEnd[index1]),
                     ],
