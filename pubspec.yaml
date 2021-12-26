@@ -33,6 +33,7 @@ dependencies:
   path_provider: ^2.0.4
   intl: ^0.17.0
   syncfusion_flutter_charts: ^19.1.54
+  sliding_up_panel: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:
