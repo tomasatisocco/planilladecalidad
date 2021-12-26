@@ -23,7 +23,7 @@ class _MenuPageState extends State<MenuPage> {
   List <String> technique = [
     'Psicion de Pies','Agarre de Cuerda','Cuatro Pasos','Set','Brazo de Arco',
     'Hombro de Arco','T','Set Up','Tensado','Anclaje','Transferencia','Holding',
-    'Moviemiento Escapular','Expansion - Apuntado','Suelta - Follow Through','Select'
+    'Moviemiento Escapular','Expansion - Apuntado','Suelta - Follow Through','Respiracion','Visualizaicon','Rutina','Seleccionar'
   ];
 
   @override
@@ -41,7 +41,7 @@ class _MenuPageState extends State<MenuPage> {
               SizedBox(height: 20),
               Image(image: AssetImage('assets/AALogo.png'),width: 100,),
               SizedBox(height: 20),
-              Text('DATE',textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade300, fontWeight: FontWeight.bold, fontSize: 17),),
+              Text('FECHA',textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade300, fontWeight: FontWeight.bold, fontSize: 17),),
               TextButton(
                 child: Text(widget.trainning.date.toString().substring(0,10), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),),
                 onPressed: (){
@@ -60,7 +60,7 @@ class _MenuPageState extends State<MenuPage> {
                 },
               ),
               SizedBox(height: 20,),
-              Text('ARROWS PER END',textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade300, fontWeight: FontWeight.bold, fontSize: 17),),
+              Text('FLECHAS POR SERIE',textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade300, fontWeight: FontWeight.bold, fontSize: 17),),
               Slider(
                 min: 1,
                 max: 18,
@@ -75,8 +75,9 @@ class _MenuPageState extends State<MenuPage> {
                   });
                 },
               ),
-              Text('TECHNICAL',textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade300, fontWeight: FontWeight.bold, fontSize: 17),),
+              Text('TECNICA',textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade300, fontWeight: FontWeight.bold, fontSize: 17),),
               DropdownButton(
+                dropdownColor: Colors.blueAccent.shade200,
                 value: value,
                 items: technique.map((String item) {
                   return DropdownMenuItem(
@@ -92,13 +93,13 @@ class _MenuPageState extends State<MenuPage> {
                 },
               ),
               SizedBox(height: 20),
-              Text('CHOOSE LEVEL',textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade300, fontWeight: FontWeight.bold, fontSize: 17),),
+              Text('ELEGIR NIVEL',textAlign: TextAlign.center, style: TextStyle(color: Colors.grey.shade300, fontWeight: FontWeight.bold, fontSize: 17),),
               SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    child: Text('Level\n1',textAlign: TextAlign.center,),
+                    child: Text('Nivel\n1',textAlign: TextAlign.center,),
                     onPressed: (){
                       setState(() {
                         widget.database.trainningsDB.last = widget.trainning;
@@ -109,7 +110,7 @@ class _MenuPageState extends State<MenuPage> {
                   ),
                   SizedBox(width: 20,),
                   ElevatedButton(
-                    child: Text('Level\n2',textAlign: TextAlign.center,),
+                    child: Text('Nivel\n2',textAlign: TextAlign.center,),
                     onPressed: (){
                   setState(() {
                     widget.database.trainningsDB.last = widget.trainning;
