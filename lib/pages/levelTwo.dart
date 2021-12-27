@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:planilla_de_calidad/classes/dataBase.dart';
 import 'package:planilla_de_calidad/classes/trainning.dart';
 import 'package:planilla_de_calidad/pages/stats.dart';
-import 'package:planilla_de_calidad/widgets/feelButton.dart';
 import 'package:planilla_de_calidad/widgets/circularButton.dart';
 
 class LevelTwoPage extends StatefulWidget {
@@ -44,48 +43,88 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
             Column(
               children: <Widget>[
                 Expanded(
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: FeelButton(
-                          color: Colors.amber,
-                          title: 'Buena Sensacion\nBuen Tiro',
-                          counter: widget.trainning.shotSecuence.where((element) => element == 'BB').length,
-                          onChanged: incrementCounter
+                  child: Container(
+                    color: Colors.green,
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: <Widget>[
+                        Text(
+                          'Sensacion Lograda',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: FeelButton(
-                          color: Colors.redAccent,
-                          title: 'Buena Sensacion\nMal Tiro',
-                          counter: widget.trainning.shotSecuence.where((element) => element == 'BM').length,
-                          onChanged: incrementCounter
+
+                        MaterialButton(
+                          elevation: 0.0,
+                          minWidth: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
+                          child: Text('${widget.trainning.shotSecuence.where((element) => element == 'BB' || element == 'BM').length}',
+                            style: TextStyle(
+                              fontSize: 40.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )
+                          ),
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => LevelTwoFinal()))
+                            .then((impact) {
+                              if(impact == 'Buen Tiro'){
+                                incrementCounter('Buena Sensacion\nBuen Tiro');
+                              } else if (impact == 'Mal Tiro'){
+                                incrementCounter('Buena Sensacion\nMal Tiro');
+                              }
+                            });
+                          },
                         ),
-                      )
-                    ],
-                  ),
+                      ],
+                    ),
+                  )    
                 ),
                 Expanded(
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: FeelButton(
-                          color: Colors.blue,
-                          title: 'Mala Sensacion\nBuen Tiro',
-                          counter: widget.trainning.shotSecuence.where((element) => element == 'MB').length,
-                          onChanged: incrementCounter
+                  child: Container(
+                    color: Colors.red,
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: <Widget>[
+                        Text(
+                          'Sensacion No Lograda',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Expanded( 
-                        child: FeelButton(
-                          color: Colors.black,
-                          title: 'Mala Sensacion\nMal Tiro',
-                          counter: widget.trainning.shotSecuence.where((element) => element == 'MM').length,
-                          onChanged: incrementCounter
+
+                        MaterialButton(
+                          elevation: 0.0,
+                          minWidth: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height,
+                          child: Text('${widget.trainning.shotSecuence.where((element) => element == 'MM' || element == 'MB').length}',
+                            style: TextStyle(
+                              fontSize: 40.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )
+                          ),
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => LevelTwoFinal()))
+                            .then((impact){
+                              if(impact == 'Buen Tiro'){
+                                incrementCounter('Mala Sensacion\nBuen Tiro');
+                              } else if (impact == 'Mal Tiro') {
+                                incrementCounter('Mala Sensacion\nMal Tiro');
+                              }
+                            });
+                          },
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                  )
                 ),
               ],
             ),
@@ -256,5 +295,80 @@ class _LevelTwoPageState extends State<LevelTwoPage> with SingleTickerProviderSt
       widget.database.trainningsDB[widget.index] = widget.trainning;
     });
     DatabaseFileRoutines().writeDataBase(databaseToJson(widget.database));
+  }
+}
+
+class LevelTwoFinal extends StatefulWidget {
+  LevelTwoFinal({Key? key}) : super(key: key);
+
+  @override
+  _LevelTwoFinalState createState() => _LevelTwoFinalState();
+}
+
+class _LevelTwoFinalState extends State<LevelTwoFinal> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(
+          children:<Widget>[
+            Column(
+              children: <Widget>[
+                Expanded(
+                  child: 
+                  Container(
+                    color: Colors.amber,
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: <Widget>[
+                        MaterialButton(
+                          elevation: 0.0,
+                          minWidth: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height/2,
+                          child: Text('Impacto en Zona',
+                            style: TextStyle(
+                              fontSize: 40.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            )
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context, 'Buen Tiro');
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  color: Colors.black,
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: <Widget>[
+                      MaterialButton(
+                        elevation: 0.0,
+                        minWidth: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height/2,
+                        child: Text('No Impacto en Zona',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 40.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          )
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context, 'Mal Tiro');
+                        },
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            )
+          ]
+        )
+      )
+    );
   }
 }

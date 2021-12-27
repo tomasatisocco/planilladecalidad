@@ -26,7 +26,7 @@ class FeelButton extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 20,
+              fontSize: 30,
               fontWeight: FontWeight.bold,
             ),
           ),

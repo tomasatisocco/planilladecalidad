@@ -18,7 +18,7 @@ class MenuPage extends StatefulWidget {
 
 class _MenuPageState extends State<MenuPage> {
 
-  String value = 'Select';
+  String value = 'Seleccionar';
 
   List <String> technique = [
     'Psicion de Pies','Agarre de Cuerda','Cuatro Pasos','Set','Brazo de Arco',

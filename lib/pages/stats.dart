@@ -51,13 +51,13 @@ class StatsPage extends StatelessWidget {
               SizedBox(height: 100,),
               SfCircularChart(
                 title: ChartTitle(
-                  text: 'Aspecto: ${trainning.technical}\n Acierto: ${(((trainning.shotSecuence.where((element) => element == 'BB' || element == 'B').length) / trainning.shotSecuence.length)*100).toStringAsFixed(1)}%',
+                  text: 'Aspecto: ${trainning.technical}\n Acierto: ${trainning.trainningProm}',
                   textStyle: TextStyle(color: Colors.blue.shade700, fontSize: 20, fontWeight: FontWeight.bold)
                 ),
                 annotations: <CircularChartAnnotation>[
                   CircularChartAnnotation(
                     widget: Container(
-                      child: Text ('BB\n ${(((trainning.shotSecuence.where((element) => element == 'BB' || element == 'B').length) / trainning.shotSecuence.length)*100).toStringAsFixed(1)}%', textAlign: TextAlign.center,),
+                      child: Text ('BB\n ${trainning.trainningProm}', textAlign: TextAlign.center,),
                     ),
                   ),
                 ],
