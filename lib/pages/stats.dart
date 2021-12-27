@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:planilla_de_calidad/classes/trainning.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -48,7 +49,9 @@ class StatsPage extends StatelessWidget {
           body: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
+
               SizedBox(height: 100,),
+
               SfCircularChart(
                 title: ChartTitle(
                   text: 'Aspecto: ${trainning.technical}\n Acierto: ${trainning.trainningProm}',
@@ -75,8 +78,12 @@ class StatsPage extends StatelessWidget {
                     explodeIndex: 1,
                   ),
                 ],
-              )],
-            ),
+              ),
+
+              Text('Fecha: ${DateFormat.yMd().format(DateTime.parse(trainning.date))}'),
+              Text('Cantidad de Tiros: ${trainning.shotSecuence.length}'),
+
+            ]),
             panelBuilder: (controller){
               return ListView.builder(
                   controller: controller,
